@@ -163,7 +163,13 @@ async def helper_cb(client, CallbackQuery:CallbackQuery, _):
                 )
             ]
         ]
-        await CallbackQuery.edit_message_text(f"AI, TTS and Image Model Settings \n\n[Check Docs here]({https://teamx-docs.netlify.app/})", reply_markup=InlineKeyboardMarkup(btn),parse_mode=ParseMode.DEFAULT)
+await CallbackQuery.edit_message_text(
+    "AI, TTS and Image Model Settings\n\n[Check Docs here](https://teamx-docs.netlify.app/)",
+    reply_markup=InlineKeyboardMarkup(btn),
+    parse_mode=ParseMode.MARKDOWN  # or omit if your client default is already Markdown
+)
+
+
     elif cb == "hb17":
         model_settings = await get_model_settings()
         current_tts = model_settings.get("tts", "athena")
