@@ -163,7 +163,7 @@ async def helper_cb(client, CallbackQuery:CallbackQuery, _):
                 )
             ]
         ]
-        await CallbackQuery.edit_message_text(f"AI, TTS and Image Model Settings \n\n[Check Docs here]({YTPROXY_URL}/docs)", reply_markup=InlineKeyboardMarkup(btn),parse_mode=ParseMode.DEFAULT)
+        await CallbackQuery.edit_message_text(f"AI, TTS and Image Model Settings \n\n[Check Docs here]({https://teamx-docs.netlify.app/})", reply_markup=InlineKeyboardMarkup(btn),parse_mode=ParseMode.DEFAULT)
     elif cb == "hb17":
         model_settings = await get_model_settings()
         current_tts = model_settings.get("tts", "athena")
