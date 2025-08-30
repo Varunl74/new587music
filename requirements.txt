@@ -11,9 +11,9 @@ httpx==0.27.2
 motor
 numpy
 opencv-python
-pillow==11.3.0
+pillow==11.0.0
 psutil
-py-tgcalls==2.2.5
+py-tgcalls==2.2.0
 pykeyboard
 https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.23.zip
 python-dotenv
@@ -22,9 +22,9 @@ requests
 speedtest-cli
 spotipy
 pymongo==3.12.0
-tgcrypto
+tgcrypto;sys_platform != "win32"
 unidecode
-uvloop
+uvloop;sys_platform != "win32"
 yt-dlp
 youtube-search
 youtube-search-python
