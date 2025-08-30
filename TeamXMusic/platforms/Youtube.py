@@ -439,6 +439,7 @@ class YouTubeAPI:
                 url
             ]
             
+            # Add headers  x-api-key for authentication required now in 3.5.0
             if headers:
                 for key, value in headers.items():
                     cmd.extend(["-H", f"{key}: {value}"])
@@ -473,6 +474,7 @@ class YouTubeAPI:
             try:
                 session = create_session()
                 
+                # Use headers for authentication (including x-api-key)
                 response = session.get(url, headers=headers, stream=True, timeout=60)
                 response.raise_for_status()
                 
@@ -516,7 +518,7 @@ class YouTubeAPI:
                     return filepath
                 
                 session = create_session()
-                getAudio = session.get(f"{YTPROXY}/audio/{vid_id}", headers=headers, timeout=60)
+                getAudio = session.get(f"{YTPROXY}/info/{vid_id}", headers=headers, timeout=60)
                 
                 try:
                     songData = getAudio.json()
@@ -528,8 +530,8 @@ class YouTubeAPI:
                 
                 status = songData.get('status')
                 if status == 'success':
-                    songlink = songData['audio_url']
-                    audio_url = base64.b64decode(songlink).decode()
+                    audio_url = songData['audio_url']
+                    #audio_url = base64.b64decode(songlink).decode() remove in 3.5.0
                     
                     result = await download_with_curl(audio_url, filepath, headers)
                     if result:
@@ -578,7 +580,7 @@ class YouTubeAPI:
                     return filepath
                 
                 session = create_session()
-                getVideo = session.get(f"{YTPROXY}/video/{vid_id}", headers=headers, timeout=60)
+                getVideo = session.get(f"{YTPROXY}/info/{vid_id}", headers=headers, timeout=60)
                 
                 try:
                     videoData = getVideo.json()
@@ -590,8 +592,8 @@ class YouTubeAPI:
                 
                 status = videoData.get('status')
                 if status == 'success':
-                    videolink = videoData['video_sd']
-                    video_url = base64.b64decode(videolink).decode()
+                    video_url = videoData['video_url']
+                    #video_url = base64.b64decode(videolink).decode() removed in 3.5.0
                     
                     result = await download_with_curl(video_url, filepath, headers)
                     if result:
