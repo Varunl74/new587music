@@ -10,8 +10,7 @@ from TeamXMusic.core.call import Teamy
 from TeamXMusic.misc import sudo
 from TeamXMusic.plugins import ALL_MODULES
 from TeamXMusic.utils.database import get_banned_users, get_gbanned
-from config import BANNED_USERS, COOKIES_URL
-from TeamXMusic.plugins.sudo.cookies import set_cookies
+from config import BANNED_USERS
 
 async def init():
     if (
@@ -49,12 +48,10 @@ async def init():
     except:
         pass
 
-    res = await set_cookies(COOKIES_URL)
-    LOGGER("TeamXMusic").info(f"{res}")
     await Teamy.decorators()
     await idle()
     await app.stop()
-    LOGGER("TeamXMusic").info("Stopping TeamX Music Bot...")
+    LOGGER("TeamXMusic").info("Stopping AnonX Music Bot...")
 
 
 if __name__ == "__main__":
