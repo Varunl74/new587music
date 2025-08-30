@@ -51,7 +51,7 @@ async def init():
     await Teamy.decorators()
     await idle()
     await app.stop()
-    LOGGER("TeamXMusic").info("Stopping AnonX Music Bot...")
+    LOGGER("TeamXMusic").info("Stopping TeamX Music Bot...")
 
 
 if __name__ == "__main__":
