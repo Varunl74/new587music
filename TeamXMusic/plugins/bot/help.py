@@ -163,11 +163,21 @@ async def helper_cb(client, CallbackQuery:CallbackQuery, _):
                 )
             ]
         ]
-await CallbackQuery.edit_message_text(
-    "AI, TTS and Image Model Settings\n\n[Check Docs here](https://teamx-docs.netlify.app/)",
-    reply_markup=InlineKeyboardMarkup(btn),
-    parse_mode=ParseMode.MARKDOWN  # or omit if your client default is already Markdown
-)
+# GOOD
+async def helper_cb(_, CallbackQuery, language):
+    cb = CallbackQuery.data
+
+    if cb == "hb16":
+        ...
+    elif cb == "hb17":            # ← align with the `if`
+        await CallbackQuery.edit_message_text(
+            "AI, TTS and Image Model Settings\n\n[Check Docs here](https://teamx-docs.netlify.app/)",
+            reply_markup=InlineKeyboardMarkup(btn),
+            parse_mode=ParseMode.MARKDOWN,
+            disable_web_page_preview=True,
+        )
+    elif cb == "hb18":
+        ...
 
 
     elif cb == "hb17":
