@@ -163,22 +163,21 @@ async def helper_cb(client, CallbackQuery:CallbackQuery, _):
                 )
             ]
         ]
-# GOOD
-async def helper_cb(_, CallbackQuery, language):
-    cb = CallbackQuery.data
+@app.on_callback_query(filters.regex(r"^hb\d+$"))
+async def helper_cb(_, cq):
+    await cq.answer()  # important
 
-    if cb == "hb16":
-        ...
-    elif cb == "hb17":            # ← align with the `if`
-        await CallbackQuery.edit_message_text(
-            "AI, TTS and Image Model Settings\n\n[Check Docs here](https://teamx-docs.netlify.app/)",
-            reply_markup=InlineKeyboardMarkup(btn),
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-        )
-    elif cb == "hb18":
-        ...
-
+    if cq.data == "hb17":
+        btn = [[InlineKeyboardButton("Back", callback_data="hb16")]]
+        try:
+            await cq.edit_message_text(
+                "AI, TTS and Image Model Settings\n\n[Check Docs here](https://teamx-docs.netlify.app/)",
+                reply_markup=InlineKeyboardMarkup(btn),
+                parse_mode=ParseMode.MARKDOWN,
+                disable_web_page_preview=True,
+            )
+        except MessageNotModified:
+            await cq.answer("Already on this page.")
 
     elif cb == "hb17":
         model_settings = await get_model_settings()
